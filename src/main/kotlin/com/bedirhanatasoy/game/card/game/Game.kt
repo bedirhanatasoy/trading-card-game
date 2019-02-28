@@ -24,7 +24,7 @@ class Game {
 
     init {
         players = IntRange(0, 1).map {
-            print("Type a name for player $it: ")
+            print("Type a name for player ${it + 1}: ")
             val playerName = getPlayerInput()
             val deck = initialDeckManaCosts
                 .map { Card(it) }
@@ -50,7 +50,7 @@ class Game {
         ruleEngine.executeRules(RuleType.AFTER_ROUND)
     }
 
-    fun startCardSelection(player: Player, opponentPlayer: Player) {
+    private fun startCardSelection(player: Player, opponentPlayer: Player) {
         showPlayerInfos()
         var selectedCardIndex = askCardIndexFromPlayer(player)
         while (selectedCardIndex >= 0 && selectedCardIndex < player.cards.size) {
@@ -69,9 +69,9 @@ class Game {
             .also { state = GameState.TERMINATED }
     }
 
-    fun showPlayerInfos() {
+    private fun showPlayerInfos() {
         println("\nPlayer Infos")
-        players.forEach { println("${it.name} - Health: ${it.health} - Mana: ${it.mana} - Cards: ${it.cards.size} - Deck Cards: ${it.deck.cards.size}") }
+        players.forEach { println("${it.name} - Health: ${it.health} - Mana: ${it.mana} - Mana Slot: ${it.manaSlot} - Cards: ${it.cards.size} - Deck Cards: ${it.deck.cards.size}") }
     }
 
     private fun showPlayerCards(player: Player) {

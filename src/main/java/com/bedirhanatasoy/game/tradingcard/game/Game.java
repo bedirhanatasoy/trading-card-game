@@ -145,6 +145,7 @@ public class Game {
         players.forEach(player -> System.out.println(player.getName()
                 + " - Health: " + player.getHealth()
                 + " - Mana: " + player.getMana()
+                + " - Mana Slot: " + player.getManaSlot()
                 + " - Cards: " + player.getCards().size()
                 + " - Deck Cards: " + player.getDeck().getCards().size()));
     }
