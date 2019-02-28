@@ -3,10 +3,12 @@ package com.bedirhanatasoy.game.card.player
 data class Player(
     var name: String,
     var health: Int,
-    var mana: Int,
+    var manaSlot: Int,
     val deck: Deck,
     val cards: MutableList<Card> = mutableListOf()
 ) {
+
+    var mana: Int = 0
 
     fun useCard(cardIndex: Int): Card? =
         cards[cardIndex]
@@ -14,8 +16,8 @@ data class Player(
             ?.also { cards.remove(it) }
             ?.also { decreaseMana(it.manaCost) }
 
-    fun increaseMana(amount: Int) {
-        mana += amount
+    fun increaseManaSlot(amount: Int) {
+        manaSlot += amount
     }
 
     fun drawRandomCardsFromDeck(amount: Int) {

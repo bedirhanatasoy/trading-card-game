@@ -28,6 +28,11 @@ public class Player {
     private int mana;
 
     /**
+     * A variable holding player's mana slots.
+     */
+    private int manaSlot;
+
+    /**
      * A variable holding player's deck.
      */
     private Deck deck;
@@ -40,10 +45,10 @@ public class Player {
     /**
      * Initializes a player with the following arguments.
      */
-    public Player(String name, int health, int mana, Deck deck) {
+    public Player(String name, int health, int manaSlot, Deck deck) {
         this.name = name;
         this.health = health;
-        this.mana = mana;
+        this.manaSlot = manaSlot;
         this.deck = deck;
         this.cards = new LinkedList<>();
     }
@@ -79,10 +84,10 @@ public class Player {
     }
 
     /**
-     * Increases player's mana by the given amount.
+     * Decreases player's mana slot by the given amount.
      */
-    public void inreaseMana(int amount) {
-        mana += amount;
+    public void increaseManaSlot(int amount) {
+        manaSlot += amount;
     }
 
     /**
@@ -90,6 +95,10 @@ public class Player {
      */
     public void drawRandomCardsFromDeck(int count) {
         IntStream.range(0, count).forEach(i -> cards.add(deck.getRandomCard()));
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
     }
 
 }

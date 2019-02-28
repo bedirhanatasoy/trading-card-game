@@ -43,17 +43,34 @@ public class RuleEngine {
     );
 
     /**
-     * Increase One Mana Rule
+     * Increase One Slot Mana Rule
      * It is executed before each round.
-     * The condition    : Active Player's mana must be less than 10
-     * The action       : Increase active player's mana by 1
+     * The condition    : Active Player's mana slot must be less than 10
+     * The action       : Increase active player's mana slot by 1
      * The else action  : -
      */
-    private Rule increaseOneManaRule = new Rule(
+    private Rule increaseOneManaSlotRule = new Rule(
             RuleType.BEFORE_ROUND,
-            game -> game.getActivePlayer().getMana() < 10,
+            game -> game.getActivePlayer().getManaSlot() < 10,
             game -> {
-                game.getActivePlayer().inreaseMana(1);
+                game.getActivePlayer().increaseManaSlot(1);
+                return null;
+            },
+            null
+    );
+
+    /**
+     * Refill Mana Rule
+     * It is executed on each round.
+     * The condition    : Active Player's mana must less than mana slot
+     * The action       : Set active player's mana by mana slot
+     * The else action  : -
+     */
+    private Rule refillManaRule = new Rule(
+            RuleType.ON_ROUND,
+            game -> game.getActivePlayer().getMana() < game.getActivePlayer().getManaSlot(),
+            game -> {
+                game.getActivePlayer().setMana(game.getActivePlayer().getManaSlot());
                 return null;
             },
             null
@@ -98,7 +115,8 @@ public class RuleEngine {
      */
     private List<Rule> rules = Arrays.asList(
             bleedingOutRule,
-            increaseOneManaRule,
+            increaseOneManaSlotRule,
+            refillManaRule,
             overloadRule,
             finishGameRule
     );

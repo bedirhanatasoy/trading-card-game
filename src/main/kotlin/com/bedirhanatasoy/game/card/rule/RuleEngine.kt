@@ -13,10 +13,16 @@ class RuleEngine(
         { game -> game.activePlayer.drawRandomCardsFromDeck(1) }
     )
 
-    private val increaseOneManaRule = Rule(
+    private val increaseOneManaSlotRule = Rule(
         RuleType.BEFORE_ROUND,
         { game -> game.activePlayer.mana < 10 },
-        { game -> game.activePlayer.increaseMana(1) }
+        { game -> game.activePlayer.increaseManaSlot(1) }
+    )
+
+    private val refillManaRule = Rule(
+        RuleType.ON_ROUND,
+        { game -> game.activePlayer.mana < game.activePlayer.manaSlot },
+        { game -> game.activePlayer.mana = game.activePlayer.manaSlot}
     )
 
     private val overloadRule = Rule(
@@ -33,7 +39,8 @@ class RuleEngine(
 
     private val gameRules = listOf(
         bleedingOutRule,
-        increaseOneManaRule,
+        increaseOneManaSlotRule,
+        refillManaRule,
         overloadRule,
         finishGameRule
     )
