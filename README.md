@@ -1,6 +1,8 @@
 # Trading Card Game
 
-This is a simple trading card game which its game logic is similiar to Hearthstone.
+This is a simple trading card game which its game logic is similiar to Hearthstone. 
+
+The game is implemented both languages Java and Kotlin.
 
 Technology stack includes:
 
