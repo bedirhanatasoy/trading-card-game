@@ -5,19 +5,10 @@ import com.bedirhanatasoy.game.tradingcard.game.Game;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * The RuleEngine class holds all game rules and has one method to execute the rules.
- */
 public class RuleEngine {
 
-    /**
-     * A Game instance to be used in rule execution.
-     */
     private Game game;
 
-    /**
-     * Initializes the rule engine instance.
-     */
     public RuleEngine(Game game) {
         this.game = game;
     }
@@ -110,9 +101,6 @@ public class RuleEngine {
             null
     );
 
-    /**
-     * List of the rules to be executed.
-     */
     private List<Rule> rules = Arrays.asList(
             bleedingOutRule,
             increaseOneManaSlotRule,
@@ -121,9 +109,6 @@ public class RuleEngine {
             finishGameRule
     );
 
-    /**
-     * It executes the rules according to their rule type
-     */
     public void executeRules(RuleType ruleType) {
         rules.stream().filter(rule -> rule.getType() == ruleType || rule.getType() == RuleType.ALL)
                 .forEach(rule -> {
